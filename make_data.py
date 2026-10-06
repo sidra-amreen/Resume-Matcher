@@ -1,5 +1,3 @@
-"""Generate a SYNTHETIC labelled dataset of (resume, jd, match) pairs.
-Replace data/pairs.csv with real labelled data (e.g. recruiter shortlists) for production use."""
 import random
 import pandas as pd
 
