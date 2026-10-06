@@ -1,4 +1,3 @@
-"""Streamlit UI:  streamlit run app.py"""
 import joblib
 import streamlit as st
 from pypdf import PdfReader
