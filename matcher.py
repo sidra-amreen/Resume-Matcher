@@ -1,4 +1,3 @@
-"""Core matching logic: feature engineering + (optionally trained) scoring model."""
 import re
 from dataclasses import dataclass
 from pathlib import Path
