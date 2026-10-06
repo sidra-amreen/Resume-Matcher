@@ -1,4 +1,3 @@
-"""Train a classifier that learns how to weigh the similarity features."""
 import joblib
 import numpy as np
 import pandas as pd
