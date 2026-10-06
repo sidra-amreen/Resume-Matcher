@@ -15,10 +15,9 @@ from matcher import FEATURES, ResumeMatcher, MODEL_PATH
 def main():
     df = pd.read_csv("data/pairs.csv")
     train_df, test_df = train_test_split(df, test_size=0.2, random_state=0, stratify=df.match)
-
-    # fit TF-IDF only on training text to avoid leakage
+    
     corpus = list(train_df.resume) + list(train_df.jd)
-    matcher.MODEL_PATH = MODEL_PATH.with_name("_none.joblib")  # ensure no old model is loaded
+    matcher.MODEL_PATH = MODEL_PATH.with_name("_none.joblib")  
     m = ResumeMatcher(corpus)
 
     def featurize(d):
