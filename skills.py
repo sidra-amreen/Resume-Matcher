@@ -1,4 +1,3 @@
-"""Skill vocabulary + extraction. Extend SKILLS freely for your domain."""
 import re
 
 SKILLS = {
