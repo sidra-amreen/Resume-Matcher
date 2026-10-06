@@ -12,10 +12,10 @@ Scores how well a resume fits a job description and explains why.
 ## Run
 ```bash
 pip install -r requirements.txt
-python make_data.py     # synthetic labelled pairs -> data/pairs.csv
-python train.py         # trains + saves model.joblib
-python demo.py          # CLI example
-streamlit run app.py    # web UI
+python make_data.py     
+python train.py         
+python demo.py          
+streamlit run app.py    
 ```
 
 ## Make it real
