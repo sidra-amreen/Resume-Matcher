@@ -39,7 +39,7 @@ def build(n=1500, seed=42):
         jd = make_jd(jd_role, rng)
         resume = make_resume(r_role, rng, rng.randint(0, 9))
         label = int(same)
-        if rng.random() < 0.08:          # label noise, like real recruiter disagreement
+        if rng.random() < 0.08:         
             label = 1 - label
         rows.append((resume, jd, label))
     return pd.DataFrame(rows, columns=["resume", "jd", "match"])
