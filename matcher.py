@@ -20,7 +20,7 @@ def clean(text: str) -> str:
 
 @dataclass
 class MatchResult:
-    score: float                 # 0-100
+    score: float                 
     features: dict
     matched_skills: list
     missing_skills: list
@@ -41,18 +41,18 @@ class ResumeMatcher:
         if MODEL_PATH.exists():
             self.model = joblib.load(MODEL_PATH)
 
-    # ---------- features ----------
+   
     def features(self, resume: str, jd: str) -> dict:
         if self._fitted:
             X = self.vec.transform([resume, jd])
-        else:  # fall back to fitting on the pair itself
+        else:  
             X = TfidfVectorizer(ngram_range=(1, 2), stop_words="english",
                                 sublinear_tf=True, preprocessor=clean).fit_transform([resume, jd])
         tfidf_sim = float(cosine_similarity(X[0], X[1])[0, 0])
 
         rs, js = extract_skills(resume), extract_skills(jd)
         inter = rs & js
-        skill_recall = len(inter) / len(js) if js else 0.0           # JD skills the resume covers
+        skill_recall = len(inter) / len(js) if js else 0.0          
         skill_jaccard = len(inter) / len(rs | js) if (rs | js) else 0.0
 
         need, have = extract_years(jd), extract_years(resume)
@@ -75,13 +75,13 @@ class ResumeMatcher:
         names = v.get_feature_names_out()
         return [names[i] for i in idx]
 
-    # ---------- scoring ----------
+  
     def score(self, resume: str, jd: str) -> MatchResult:
         f = self.features(resume, jd)
         x = np.array([[f[n] for n in FEATURES]])
         if self.model is not None:
             s = float(self.model.predict_proba(x)[0, 1])
-        else:  # sensible hand-tuned blend when no trained model exists
+        else:  
             s = (0.30 * f["tfidf_sim"] + 0.40 * f["skill_recall"] +
                  0.10 * f["skill_jaccard"] + 0.10 * min(f["exp_ratio"], 1) + 0.10 * f["keyword_cov"])
         rs, js = extract_skills(resume), extract_skills(jd)
