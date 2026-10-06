@@ -1,3 +1,4 @@
+import os
 import random
 import pandas as pd
 
@@ -46,6 +47,7 @@ def build(n=1500, seed=42):
 
 
 if __name__ == "__main__":
+    os.makedirs("data", exist_ok=True)
     df = build()
     df.to_csv("data/pairs.csv", index=False)
     print(df.shape, df.match.mean())
